@@ -1,0 +1,185 @@
+@use '@/styles/variables.scss' as *;
+
+.roomContainer {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F8F0F5 0%, #FFFFFF 100%);
+  padding-bottom: $spacing-xl;
+}
+
+.roomInfo {
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  padding: $spacing-xl $spacing-lg;
+  color: white;
+  text-align: center;
+}
+
+.roomLabel {
+  font-size: $font-size-md;
+  opacity: 0.9;
+  margin-bottom: $spacing-xs;
+}
+
+.roomNumber {
+  font-size: 64rpx;
+  font-weight: $font-weight-bold;
+  letter-spacing: 8rpx;
+  margin-bottom: $spacing-md;
+}
+
+.roomStatus {
+  display: inline-block;
+  padding: $spacing-xs $spacing-lg;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+}
+
+.playersSection {
+  padding: $spacing-lg;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.playersList {
+  display: flex;
+  gap: $spacing-md;
+  overflow-x: auto;
+  padding: $spacing-sm 0;
+  white-space: nowrap;
+}
+
+.statsSection {
+  padding: 0 $spacing-lg $spacing-lg;
+}
+
+.statsCard {
+  background: white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: #9B59B6;
+  margin-bottom: $spacing-xs;
+}
+
+.statLabel {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.actionsSection {
+  padding: 0 $spacing-lg;
+}
+
+.actionButtons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+}
+
+.actionButton {
+  height: 180rpx;
+  border-radius: $radius-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  transition: all $transition-base;
+  border: none;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.buttonTruth {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 100%);
+  color: white;
+}
+
+.buttonDare {
+  background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
+  color: white;
+}
+
+.buttonMessage {
+  background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%);
+  color: white;
+}
+
+.buttonIcon {
+  font-size: 48rpx;
+  margin-bottom: $spacing-xs;
+}
+
+.buttonText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+}
+
+.controlButtons {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+}
+
+.controlButton {
+  flex: 1;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+  border: none;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.buttonStart {
+  background: linear-gradient(135deg, #00B42A 0%, #00A86B 100%);
+  color: white;
+}
+
+.buttonEnd {
+  background: linear-gradient(135deg, #F53F3F 0%, #D32F2F 100%);
+  color: white;
+}
+
+.buttonResult {
+  background: linear-gradient(135deg, #FF7D00 0%, #FF6B00 100%);
+  color: white;
+}
+
+.emptyPlayers {
+  text-align: center;
+  padding: $spacing-xl 0;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}

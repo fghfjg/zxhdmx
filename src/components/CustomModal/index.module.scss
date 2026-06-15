@@ -1,0 +1,69 @@
+@use '@/styles/variables.scss' as *;
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  width: 600rpx;
+  background: white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-popup;
+}
+
+.modalHeader {
+  padding: $spacing-lg;
+  border-bottom: 2rpx solid $color-divider;
+  text-align: center;
+}
+
+.modalTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.modalBody {
+  padding: $spacing-lg;
+}
+
+.modalFooter {
+  display: flex;
+  border-top: 2rpx solid $color-divider;
+}
+
+.modalButton {
+  flex: 1;
+  height: $button-height-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+  border: none;
+  background: transparent;
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.modalButtonCancel {
+  color: $color-text-secondary;
+  border-right: 2rpx solid $color-divider;
+}
+
+.modalButtonConfirm {
+  color: #9B59B6;
+}

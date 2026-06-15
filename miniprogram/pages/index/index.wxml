@@ -1,0 +1,108 @@
+<view class="page">
+  <!-- 顶部渐变区域 -->
+  <view class="header">
+    <view class="header-title">真心话大冒险</view>
+    <view class="header-subtitle">创建房间，邀请好友一起玩耍</view>
+    <button class="btn-create" bindtap="onShowCreate">
+      <text class="btn-create-icon">✨</text>
+      <text>发起游戏</text>
+    </button>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <input 
+      class="search-input" 
+      placeholder=" 搜索房间名称..." 
+      value="{{searchKeyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearch"
+    />
+    <view wx:if="{{searchKeyword}}" class="search-clear" bindtap="onClearSearch">✕</view>
+  </view>
+
+  <!-- 创建房间弹窗 -->
+  <view wx:if="{{showCreateModal}}" class="modal-mask" bindtap="onCloseCreate">
+    <view class="modal-box" catchtap="stopPropagation">
+      <view class="modal-title">创建房间</view>
+      <view class="form-item">
+        <text class="form-label">房间名称</text>
+        <input class="form-input" placeholder="请输入房间名称" value="{{roomName}}" bindinput="onRoomNameInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">房间描述（选填）</text>
+        <textarea class="form-textarea" placeholder="请输入房间描述" value="{{description}}" bindinput="onDescriptionInput" />
+      </view>
+      <view class="form-item">
+        <text class="form-label">最大人数</text>
+        <view class="max-players-bar">
+          <view 
+            wx:for="{{maxPlayerOptions}}" 
+            wx:key="*this" 
+            class="player-option {{maxPlayers === item ? 'selected' : ''}}"
+            bindtap="onSelectMaxPlayers"
+            data-count="{{item}}"
+          >{{item}}人</view>
+        </view>
+      </view>
+      <view class="form-item">
+        <text class="form-label">房间密码（选填，4位数字）</text>
+        <input class="form-input" type="number" maxlength="4" placeholder="留空则无密码" value="{{roomPassword}}" bindinput="onPasswordInput" />
+      </view>
+      <button class="btn-primary btn-full" bindtap="onCreateRoom">创建房间</button>
+    </view>
+  </view>
+
+  <!-- 房间列表 -->
+  <view class="room-list-section">
+    <view class="section-header">
+      <text class="section-title"> 等待中的房间</text>
+      <text class="section-count">共 {{totalRooms}} 个</text>
+    </view>
+
+    <view wx:if="{{rooms.length === 0}}" class="empty-state">
+      <text class="empty-icon">😴</text>
+      <text class="empty-text">暂无等待中的房间</text>
+    </view>
+
+    <view wx:else>
+      <view 
+        wx:for="{{rooms}}" 
+        wx:key="_id" 
+        class="room-card"
+        bindtap="onJoinRoom"
+        data-roomid="{{item._id}}"
+      >
+        <view class="room-card-left">
+          <view class="room-icon">🎮</view>
+          <view class="room-card-info">
+            <view class="room-card-name-row">
+              <text class="room-card-name">{{item.roomName}}</text>
+              <text wx:if="{{item.password}}" class="lock-icon">🔒</text>
+              <text class="room-tag {{item.status}}">{{item.status === 'waiting' ? '等待中' : '已结束'}}</text>
+            </view>
+            <text class="room-card-host">房主: {{item.creatorId ? item.creatorId.substr(0, 6) : '匿名'}}***</text>
+            <!-- 人数进度条 -->
+            <view class="player-bar">
+              <view class="player-bar-bg">
+                <view class="player-bar-fill" style="width: {{item.playerPercent}}%"></view>
+              </view>
+              <text class="player-bar-text">{{item.participants.length}}/{{item.maxPlayers}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="room-card-right">
+          <text class="join-btn-text">加入</text>
+        </view>
+      </view>
+
+      <!-- 加载更多 -->
+      <view wx:if="{{hasMore}}" class="load-more" bindtap="onLoadMore">
+        <text>加载更多</text>
+      </view>
+      <view wx:else class="load-more">
+        <text class="no-more">没有更多了</text>
+      </view>
+    </view>
+  </view>
+</view>

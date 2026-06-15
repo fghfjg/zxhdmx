@@ -1,0 +1,187 @@
+@use '@/styles/variables.scss' as *;
+
+.resultContainer {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F8F0F5 0%, #FFFFFF 100%);
+  padding: $spacing-lg;
+}
+
+.overviewCard {
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  color: white;
+  margin-bottom: $spacing-xl;
+}
+
+.overviewTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-lg;
+  text-align: center;
+}
+
+.overviewStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+}
+
+.overviewStat {
+  text-align: center;
+}
+
+.overviewValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-xs;
+}
+
+.overviewLabel {
+  font-size: $font-size-sm;
+  opacity: 0.9;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  margin-top: $spacing-xl;
+}
+
+.rankList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.rankItem {
+  background: white;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.rankNumber {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: $radius-round;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: white;
+  flex-shrink: 0;
+}
+
+.rankFirst {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+}
+
+.rankSecond {
+  background: linear-gradient(135deg, #C0C0C0 0%, #A0A0A0 100%);
+}
+
+.rankThird {
+  background: linear-gradient(135deg, #CD7F32 0%, #B87333 100%);
+}
+
+.rankOther {
+  background: #F5F5F5;
+  color: $color-text-secondary;
+}
+
+.rankAvatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: $radius-round;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.rankInfo {
+  flex: 1;
+}
+
+.rankName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.rankValue {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.rankStat {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: #9B59B6;
+}
+
+.emptyRank {
+  text-align: center;
+  padding: $spacing-xl 0;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+}
+
+.actionButton {
+  flex: 1;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+  border: none;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.buttonBack {
+  background: #F5F5F5;
+  color: $color-text-secondary;
+}
+
+.buttonHome {
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  color: white;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: $spacing-md;
+}
+
+.loadingText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}

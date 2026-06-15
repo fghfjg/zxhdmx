@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="game-header">
+    <text class="game-title">{{gameType === 'truth' ? '💬 真心话' : '🚀 大冒险'}}</text>
+  </view>
+
+  <view class="player-section">
+    <view class="player-avatar">{{currentPlayer.avatar}}</view>
+    <view class="player-name">{{currentPlayer.name}}</view>
+    <view class="player-label">挑战者</view>
+  </view>
+
+  <view class="question-section">
+    <view class="question-card">
+      <text class="question">{{currentQuestion}}</text>
+    </view>
+  </view>
+
+  <view class="action-section">
+    <view 
+      class="action-btn" 
+      bindtap="startComplete"
+      wx:if="!completed"
+    >
+      {{isCompleting ? '⏳ 挑战中...' : '🎯 开始挑战'}}
+    </view>
+    
+    <view wx:if="completed" class="result-section">
+      <view class="result-icon">🎉</view>
+      <view class="result-text">挑战完成！</view>
+      <view class="action-btn secondary" bindtap="nextRound">
+        🔄 下一题
+      </view>
+    </view>
+
+    <view class="back-btn" bindtap="backToRoom">
+      返回房间
+    </view>
+  </view>
+</view>

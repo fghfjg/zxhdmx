@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="stats-section">
+    <view class="section-header">
+      <text class="section-title">📊 游戏统计</text>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.totalGames}}</text>
+        <text class="stat-label">总游戏次数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.truthCount}}</text>
+        <text class="stat-label">真心话</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.dareCount}}</text>
+        <text class="stat-label">大冒险</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{statistics.completionRate}}%</text>
+        <text class="stat-label">完成率</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="ranking-section">
+    <view class="section-header">
+      <text class="section-title">🏆 排行榜</text>
+    </view>
+    <view class="ranking-list">
+      <view wx:for="{{rankings}}" wx:key="rank" class="ranking-item">
+        <view class="rank-badge" style="background: {{item.rank <= 3 ? '#FFD700' : '#E0E0E0'}}; color: {{item.rank <= 3 ? '#8B4513' : '#666'}}">
+          {{item.rank}}
+        </view>
+        <view class="player-info">
+          <view class="player-avatar">{{item.avatar}}</view>
+          <view class="player-details">
+            <text class="player-name">{{item.user}}</text>
+            <text class="player-stats">💬{{item.truth}} 🚀{{item.dare}}</text>
+          </view>
+        </view>
+        <view class="player-score">{{item.score}}分</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-header">
+      <text class="section-title">📝 挑战记录</text>
+    </view>
+    <view class="history-list">
+      <view wx:for="{{records}}" wx:key="id" class="history-item">
+        <view class="type-badge {{item.type}}">
+          {{item.type === 'truth' ? '💬 真心话' : '🚀 大冒险'}}
+        </view>
+        <view class="history-content">
+          <text class="history-question">{{item.question}}</text>
+          <view class="history-meta">
+            <text class="history-player">{{item.player}}</text>
+            <text class="history-time">{{item.time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="back-btn" bindtap="goBack">
+    返回房间
+  </view>
+</view>

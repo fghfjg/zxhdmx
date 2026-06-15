@@ -1,0 +1,151 @@
+<view class="page">
+  <!-- 房间信息卡片 -->
+  <view class="room-card">
+    <view class="room-header">
+      <text class="room-name">{{roomInfo.roomName}}</text>
+      <text class="room-status {{roomInfo.status === 'waiting' ? 'waiting' : 'ended'}}">
+        {{roomInfo.status === 'waiting' ? '等待中' : '已结束'}}
+      </text>
+    </view>
+    <!-- 房间号 -->
+    <view class="room-id-bar" bindtap="onCopyRoomId">
+      <text class="room-id-label">房间号</text>
+      <text class="room-id-value">{{roomInfo._id ? roomInfo._id.substr(0, 8) : '------'}}</text>
+      <text class="copy-icon">📋</text>
+    </view>
+    <view wx:if="{{roomInfo.description}}" class="room-desc">{{roomInfo.description}}</view>
+    <view class="room-meta">
+      <text class="meta-item">房主: {{roomInfo.creatorId ? roomInfo.creatorId.substr(0, 6) : '匿名'}}***</text>
+      <text class="meta-item">{{roomInfo.participants ? roomInfo.participants.length : 0}}/{{roomInfo.maxPlayers || 6}}人</text>
+    </view>
+    <!-- 人数进度条 -->
+    <view class="player-bar">
+      <view class="player-bar-bg">
+        <view class="player-bar-fill" style="width: {{playerPercent}}%"></view>
+      </view>
+    </view>
+    <!-- 分享按钮 -->
+    <view wx:if="{{roomInfo.status === 'waiting'}}" class="share-bar">
+      <button class="btn-share" open-type="share">
+        <text class="share-icon">📤</text>
+        <text>邀请好友加入</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 参与者列表（横向滚动） -->
+  <view class="participants-section">
+    <view class="section-title">👥 参与者 ({{roomInfo.participants ? roomInfo.participants.length : 0}}/{{roomInfo.maxPlayers || 6}})</view>
+    <scroll-view scroll-x class="participants-scroll" enable-flex>
+      <view wx:if="{{!roomInfo.participants || roomInfo.participants.length === 0}}" class="empty-participants">
+        <text>暂无参与者，快来开始游戏吧！</text>
+      </view>
+      <view 
+        wx:for="{{roomInfo.participants}}" 
+        wx:key="openId" 
+        class="participant-avatar-item {{isCreator ? 'kickable' : ''}}"
+        bindlongpress="onLongPressParticipant"
+        data-openid="{{item.openId}}"
+        data-nickname="{{item.nickName}}"
+      >
+        <view class="avatar-circle" style="background: {{item.avatarColor || '#7C3AED'}}">
+          <text>{{item.nickName ? item.nickName.charAt(0) : '玩'}}</text>
+        </view>
+        <text class="avatar-name">{{item.nickName || '匿名'}}</text>
+        <text wx:if="{{item.openId === roomInfo.creatorId}}" class="host-badge">房主</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 聊天区域 -->
+  <view class="chat-section">
+    <view class="section-title">💬 房间聊天</view>
+    <scroll-view scroll-y class="chat-messages" scroll-into-view="{{scrollToMsg}}">
+      <view wx:if="{{messages.length === 0}}" class="chat-empty">
+        <text>暂无消息，来说点什么吧～</text>
+      </view>
+      <view 
+        wx:for="{{messages}}" 
+        wx:key="_id" 
+        id="msg-{{index}}"
+        class="chat-msg {{item.openId === myOpenId ? 'chat-msg-self' : 'chat-msg-other'}}"
+      >
+        <view wx:if="{{item.openId !== myOpenId}}" class="chat-msg-avatar" style="background: {{item.avatarColor || '#A78BFA'}}">
+          <text>{{item.nickName ? item.nickName.charAt(0) : '?'}}</text>
+        </view>
+        <view class="chat-msg-bubble">
+          <text class="chat-msg-name">{{item.nickName || '匿名'}}</text>
+          <text class="chat-msg-content">{{item.content}}</text>
+        </view>
+        <view wx:if="{{item.openId === myOpenId}}" class="chat-msg-avatar" style="background: #7C3AED">
+          <text>{{item.nickName ? item.nickName.charAt(0) : '我'}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="chat-input-bar">
+      <input 
+        class="chat-input" 
+        placeholder="说点什么..." 
+        value="{{chatInput}}"
+        maxlength="20"
+        bindinput="onChatInput"
+        bindconfirm="onSendChat"
+      />
+      <view class="chat-emoji-bar">
+        <text 
+          wx:for="{{emojiList}}" 
+          wx:key="*this" 
+          class="emoji-item"
+          bindtap="onSendEmoji"
+          data-emoji="{{item}}"
+        >{{item}}</text>
+      </view>
+      <button class="btn-send" bindtap="onSendChat">发送</button>
+    </view>
+  </view>
+
+  <!-- 操作按钮区 -->
+  <view class="action-section">
+    <view wx:if="{{isCreator && roomInfo.status === 'waiting'}}" class="action-row">
+      <button class="btn-danger" bindtap="onEndRoom">结束房间</button>
+    </view>
+    <view wx:if="{{roomInfo.status === 'waiting'}}" class="action-row">
+      <button class="btn-primary" bindtap="onStartGame">🎲 开始游戏</button>
+    </view>
+    <view wx:if="{{roomInfo.status === 'ended'}}" class="ended-hint">🔒 房间已结束</view>
+  </view>
+</view>
+
+<!-- 题目弹窗 -->
+<view wx:if="{{showQuestion}}" class="modal-mask" bindtap="closeQuestion">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view wx:if="{{isDrawing}}" class="drawing-animation">
+      <text class="drawing-icon">🎲</text>
+      <text class="drawing-text">正在抽取题目...</text>
+    </view>
+    <block wx:else>
+      <view class="modal-header">
+        <text class="question-icon">{{currentQuestion && currentQuestion.type === 'truth' ? '💭' : '🎲'}}</text>
+        <text class="question-label">{{currentQuestion && currentQuestion.type === 'truth' ? '真心话' : '大冒险'}}</text>
+      </view>
+      <view class="modal-body">
+        <text class="question-text">{{currentQuestion ? currentQuestion.content : ''}}</text>
+      </view>
+    </block>
+    <button class="btn-primary modal-btn" bindtap="closeQuestion">
+      {{isDrawing ? '抽取中...' : '确定'}}
+    </button>
+  </view>
+</view>
+
+<!-- 踢人确认弹窗 -->
+<view wx:if="{{showKickModal}}" class="modal-mask" bindtap="onCloseKick">
+  <view class="modal-content modal-small" catchtap="stopPropagation">
+    <view class="modal-title">确认踢出</view>
+    <text class="modal-desc">确定要将「{{kickTargetNickName}}」移出房间吗？</text>
+    <view class="modal-btns">
+      <button class="btn-cancel" bindtap="onCloseKick">取消</button>
+      <button class="btn-danger btn-confirm" bindtap="onConfirmKick">确认踢出</button>
+    </view>
+  </view>
+</view>

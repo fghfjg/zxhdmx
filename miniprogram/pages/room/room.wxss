@@ -1,0 +1,440 @@
+.page {
+  min-height: 100vh;
+  background: #F5F3FF;
+  padding-bottom: 200rpx;
+}
+
+/* 房间卡片 */
+.room-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(124, 58, 237, 0.08);
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.room-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.room-status {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+}
+
+.room-status.waiting { background: #DCFCE7; color: #16A34A; }
+.room-status.ended { background: #FEE2E2; color: #DC2626; }
+
+.room-id-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.room-id-label { font-size: 24rpx; color: #7C3AED; font-weight: bold; }
+.room-id-value { font-size: 28rpx; color: #333; font-weight: bold; flex: 1; font-family: monospace; }
+.copy-icon { font-size: 28rpx; }
+
+.room-desc {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  padding: 16rpx;
+  background: #F9FAFB;
+  border-radius: 12rpx;
+}
+
+.room-meta {
+  display: flex;
+  gap: 30rpx;
+  margin-bottom: 16rpx;
+}
+
+.meta-item { font-size: 26rpx; color: #999; }
+
+.player-bar { margin-bottom: 16rpx; }
+.player-bar-bg {
+  height: 12rpx;
+  background: #F3F4F6;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+.player-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7C3AED, #A78BFA);
+  border-radius: 6rpx;
+}
+
+.share-bar { margin-top: 16rpx; }
+.btn-share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  width: 100%;
+  background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%);
+  color: #16A34A;
+  border: none;
+  border-radius: 16rpx;
+  padding: 18rpx 32rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.btn-share:active { opacity: 0.8; }
+.share-icon { font-size: 32rpx; }
+
+/* 参与者 */
+.participants-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin: 0 20rpx 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(124, 58, 237, 0.06);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.participants-scroll {
+  white-space: nowrap;
+}
+
+.empty-participants {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.participant-avatar-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20rpx;
+  padding: 8rpx;
+}
+
+.participant-avatar-item.kickable:active {
+  opacity: 0.6;
+}
+
+.avatar-circle {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.avatar-name {
+  font-size: 22rpx;
+  color: #666;
+  max-width: 80rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.host-badge {
+  font-size: 18rpx;
+  background: #FEF3C7;
+  color: #D97706;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+  margin-top: 4rpx;
+}
+
+/* 聊天区域 */
+.chat-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin: 0 20rpx 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(124, 58, 237, 0.06);
+}
+
+.chat-messages {
+  height: 300rpx;
+  margin-bottom: 16rpx;
+}
+
+.chat-empty {
+  text-align: center;
+  padding: 60rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.chat-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.chat-msg-self {
+  flex-direction: row-reverse;
+}
+
+.chat-msg-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+.chat-msg-bubble {
+  max-width: 400rpx;
+  background: #F3F4F6;
+  border-radius: 16rpx;
+  padding: 12rpx 16rpx;
+}
+
+.chat-msg-self .chat-msg-bubble {
+  background: #EDE9FE;
+}
+
+.chat-msg-name {
+  font-size: 20rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.chat-msg-content {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.chat-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.chat-input {
+  flex: 1;
+  height: 64rpx;
+  background: #F3F4F6;
+  border-radius: 32rpx;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+}
+
+.chat-emoji-bar {
+  display: flex;
+  gap: 4rpx;
+}
+
+.emoji-item {
+  font-size: 36rpx;
+  padding: 4rpx;
+}
+
+.btn-send {
+  background: #7C3AED;
+  color: white;
+  border: none;
+  border-radius: 24rpx;
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+/* 操作按钮 */
+.action-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background: white;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.action-row {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  color: white;
+  border: none;
+  border-radius: 32rpx;
+  padding: 24rpx 48rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  flex: 1;
+}
+.btn-primary:active { opacity: 0.8; }
+
+.btn-danger {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: white;
+  border: none;
+  border-radius: 32rpx;
+  padding: 24rpx 48rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  flex: 1;
+}
+.btn-danger:active { opacity: 0.8; }
+
+.ended-hint {
+  text-align: center;
+  padding: 24rpx;
+  background: #FEE2E2;
+  color: #DC2626;
+  border-radius: 32rpx;
+  font-size: 30rpx;
+}
+
+/* 弹窗 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 80%;
+  background: white;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  animation: modalIn 0.3s ease-out;
+}
+
+.modal-small {
+  width: 70%;
+  text-align: center;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.modal-desc {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  display: block;
+  margin-bottom: 30rpx;
+}
+
+.modal-btns {
+  display: flex;
+  gap: 16rpx;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #F3F4F6;
+  color: #666;
+  border: none;
+  border-radius: 24rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+.btn-confirm {
+  flex: 1;
+  border-radius: 24rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+
+/* 抽取动画 */
+.drawing-animation {
+  text-align: center;
+  padding: 60rpx 20rpx;
+}
+
+.drawing-icon {
+  font-size: 80rpx;
+  animation: spin 1s linear infinite;
+  display: block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.drawing-text {
+  font-size: 32rpx;
+  color: #7C3AED;
+  margin-top: 20rpx;
+  font-weight: bold;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  margin-bottom: 30rpx;
+}
+
+.question-icon { font-size: 40rpx; }
+.question-label { font-size: 32rpx; font-weight: bold; color: #7C3AED; }
+
+.modal-body {
+  text-align: center;
+  padding: 40rpx 20rpx;
+  background: #F9FAFB;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.question-text {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+.modal-btn { width: 100%; }

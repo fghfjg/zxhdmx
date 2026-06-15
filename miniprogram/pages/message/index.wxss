@@ -1,0 +1,131 @@
+.container {
+  min-height: 100vh;
+  background: #F8F0F5;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 40rpx;
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.count {
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.8);
+}
+
+.message-list {
+  flex: 1;
+  padding: 32rpx;
+}
+
+.message-item {
+  display: flex;
+  gap: 20rpx;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.05);
+}
+
+.message-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  flex-shrink: 0;
+}
+
+.message-content {
+  flex: 1;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.message-user {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.message-time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.message-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+}
+
+.message-actions {
+  display: flex;
+  gap: 32rpx;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.action-icon {
+  font-size: 28rpx;
+}
+
+.action-count {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.input-section {
+  display: flex;
+  gap: 20rpx;
+  padding: 24rpx 32rpx;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+}
+
+.input {
+  flex: 1;
+  height: 80rpx;
+  background: #f8f9fa;
+  border-radius: 40rpx;
+  padding: 0 32rpx;
+  font-size: 28rpx;
+}
+
+.send-btn {
+  padding: 0 40rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #fff;
+}

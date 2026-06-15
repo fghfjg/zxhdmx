@@ -1,0 +1,122 @@
+@use '@/styles/variables.scss' as *;
+
+.gameContainer {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F8F0F5 0%, #FFFFFF 100%);
+  padding: $spacing-lg 0;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: $spacing-md;
+}
+
+.loadingText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+}
+
+.errorText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  text-align: center;
+}
+
+.retryButton {
+  margin-top: $spacing-lg;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  color: white;
+  border: none;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: white;
+  margin: 0 $spacing-lg $spacing-lg;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+.playerAvatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: $radius-round;
+  object-fit: cover;
+}
+
+.playerDetails {
+  flex: 1;
+}
+
+.playerName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.challengeCount {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+}
+
+.actionButton {
+  flex: 1;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+  border: none;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.buttonBack {
+  background: #F5F5F5;
+  color: $color-text-secondary;
+}
+
+.buttonHome {
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  color: white;
+}

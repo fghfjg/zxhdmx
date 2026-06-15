@@ -1,0 +1,99 @@
+<view class="page">
+  <!-- 用户卡片 -->
+  <view class="user-card">
+    <view class="user-avatar">玩</view>
+    <view class="user-info">
+      <text class="user-name">玩家</text>
+      <text class="user-id">ID: {{openId ? openId.substr(0, 8) : '未获取'}}</text>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-section">
+    <view class="section-title">📊 游戏统计</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalGames}}</text>
+        <text class="stat-label">参与次数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.truthCount}}</text>
+        <text class="stat-label">真心话</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.dareCount}}</text>
+        <text class="stat-label">大冒险</text>
+      </view>
+    </view>
+    <view class="stats-extra">
+      <view class="stat-extra-item">
+        <text class="stat-extra-label">今日参与</text>
+        <text class="stat-extra-value">{{stats.todayGames}}</text>
+      </view>
+      <view class="stat-extra-item">
+        <text class="stat-extra-label">参与房间</text>
+        <text class="stat-extra-value">{{stats.uniqueRooms}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 7天趋势图 -->
+  <view class="trend-section">
+    <view class="section-title">📈 近7天参与趋势</view>
+    <view class="trend-chart">
+      <view wx:for="{{trendData}}" wx:key="label" class="trend-bar-item">
+        <view class="trend-bar-bg">
+          <view class="trend-bar-fill" style="height: {{item.percent}}%"></view>
+        </view>
+        <text class="trend-label">{{item.label}}</text>
+        <text class="trend-count">{{item.count}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="history-section">
+    <view class="section-header">
+      <text class="section-title">📜 游戏记录</text>
+      <text class="record-count">共 {{historyList.length}} 条</text>
+    </view>
+
+    <view wx:if="{{historyList.length === 0}}" class="empty-state">
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">暂无游戏记录</text>
+      <button class="btn-primary small" bindtap="goToHome">去参与游戏</button>
+    </view>
+
+    <view wx:else>
+      <view wx:for="{{historyList}}" wx:key="index" class="history-card">
+        <view class="history-info">
+          <text class="room-name">{{item.roomName}}</text>
+          <view class="question-info">
+            <text class="question-type">{{item.type === 'truth' ? '💭' : '🎲'}}</text>
+            <text class="question-text">{{item.questionContent || item.questionText}}</text>
+          </view>
+          <text class="history-time">{{formatTime(item.timestamp)}}</text>
+        </view>
+        <view class="history-status">
+          <text class="status-tag {{item.type === 'truth' ? 'truth' : 'dare'}}">
+            {{item.type === 'truth' ? '真心话' : '大冒险'}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="onShare">
+      <text class="menu-icon">📤</text>
+      <text class="menu-text">分享给好友</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="onAbout">
+      <text class="menu-icon">️</text>
+      <text class="menu-text">关于游戏</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+</view>

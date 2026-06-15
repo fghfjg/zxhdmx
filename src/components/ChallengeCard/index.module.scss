@@ -1,0 +1,94 @@
+@use '@/styles/variables.scss' as *;
+
+.challengeCard {
+  background: white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-card;
+  margin: $spacing-lg;
+  min-height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.challengeType {
+  display: inline-block;
+  padding: $spacing-xs $spacing-lg;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  margin-bottom: $spacing-lg;
+}
+
+.typeTruth {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 100%);
+  color: white;
+}
+
+.typeDare {
+  background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
+  color: white;
+}
+
+.challengeContent {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  line-height: $line-height-loose;
+  margin-bottom: $spacing-lg;
+}
+
+.challengeAnswer {
+  width: 100%;
+  min-height: 200rpx;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  font-size: $font-size-md;
+  margin-bottom: $spacing-lg;
+  box-sizing: border-box;
+}
+
+.reactionSection {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-xl;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-lg;
+  border-top: 2rpx solid $color-divider;
+}
+
+.reactionButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.reactionIcon {
+  font-size: 48rpx;
+}
+
+.reactionCount {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.completedBadge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-lg;
+  background: #E8F5E9;
+  color: #00B42A;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  margin-top: $spacing-md;
+}

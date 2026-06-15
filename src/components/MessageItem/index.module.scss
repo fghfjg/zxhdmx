@@ -1,0 +1,64 @@
+@use '@/styles/variables.scss' as *;
+
+.messageItem {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.messageItemOwn {
+  flex-direction: row-reverse;
+}
+
+.messageAvatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: $radius-round;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.messageContent {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.messageInfo {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.messageName {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.messageTime {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.messageBubble {
+  padding: $spacing-md;
+  border-radius: $radius-lg;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  word-wrap: break-word;
+}
+
+.messageBubbleOther {
+  background: white;
+  color: $color-text-primary;
+  border-bottom-left-radius: $radius-xs;
+}
+
+.messageBubbleOwn {
+  background: linear-gradient(135deg, #9B59B6 0%, #FF6B9D 100%);
+  color: white;
+  border-bottom-right-radius: $radius-xs;
+}

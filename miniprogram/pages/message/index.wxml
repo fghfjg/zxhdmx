@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="header">
+    <text class="title">💬 留言板</text>
+    <text class="count">{{messages.length}} 条留言</text>
+  </view>
+
+  <scroll-view class="message-list" scroll-y>
+    <view wx:for="{{messages}}" wx:key="id" class="message-item">
+      <view class="message-avatar">{{item.avatar}}</view>
+      <view class="message-content">
+        <view class="message-header">
+          <text class="message-user">{{item.user}}</text>
+          <text class="message-time">{{item.time}}</text>
+        </view>
+        <text class="message-text">{{item.content}}</text>
+        <view class="message-actions">
+          <view class="action-item" bindtap="likeMessage" data-id="{{item.id}}">
+            <text class="action-icon">❤️</text>
+            <text class="action-count">{{item.likes}}</text>
+          </view>
+          <view class="action-item" bindtap="laughMessage" data-id="{{item.id}}">
+            <text class="action-icon">😂</text>
+            <text class="action-count">{{item.laughed}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="input-section">
+    <input 
+      class="input" 
+      placeholder="输入留言..." 
+      value="{{inputText}}" 
+      bindinput="inputMessage"
+    />
+    <view class="send-btn" bindtap="sendMessage">发送</view>
+  </view>
+</view>

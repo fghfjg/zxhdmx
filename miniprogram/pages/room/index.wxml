@@ -1,0 +1,96 @@
+<view class="container">
+  <view class="room-header">
+    <view class="room-title">{{room.name || '我的房间'}}</view>
+    <view class="room-id">房间号: {{room.id || '123456'}}</view>
+  </view>
+
+  <view class="players-section">
+    <view class="section-header">
+      <text class="section-title">👥 玩家列表</text>
+      <text class="player-count">{{players.length}}人</text>
+    </view>
+    <view class="player-list">
+      <view 
+        wx:for="{{players}}" 
+        wx:key="id" 
+        class="player-item"
+        bindtap="selectPlayer"
+        data-player="{{item}}"
+      >
+        <view class="player-avatar">{{item.avatar}}</view>
+        <view class="player-info">
+          <view class="player-name">
+            {{item.name}}
+            <text wx:if="{{item.role === 'host'}}" class="host-tag">房主</text>
+          </view>
+          <view class="player-status {{item.status}}">
+            {{item.status === 'online' ? '在线' : '离开'}}
+          </view>
+        </view>
+        <view class="player-actions">
+          <text wx:if="{{item.role !== 'host'}}" class="kick-btn" bindtap="kickPlayer" data-player-id="{{item.id}}">移出</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-section">
+    <view class="section-header">
+      <text class="section-title">🎮 游戏控制</text>
+    </view>
+    
+    <view wx:if="{{!gameStarted}}" class="game-controls">
+      <view class="game-btn start" bindtap="startGame">
+        🎉 开始游戏
+      </view>
+    </view>
+
+    <view wx:else class="game-controls active">
+      <view class="current-turn">
+        <text class="turn-label">当前回合</text>
+        <view class="turn-player">
+          <text class="avatar">{{currentTurn.avatar}}</text>
+          <text class="name">{{currentTurn.name}}</text>
+        </view>
+      </view>
+      <view class="action-buttons">
+        <view class="action-btn truth" bindtap="chooseTruth">
+          💬 真心话
+        </view>
+        <view class="action-btn dare" bindtap="chooseDare">
+          🚀 大冒险
+        </view>
+      </view>
+      <view class="game-btn end" bindtap="endGame">
+        ⏹️ 结束游戏
+      </view>
+    </view>
+  </view>
+
+  <view class="nav-section">
+    <view class="nav-btn" bindtap="goToMessages">
+      💬 留言板
+    </view>
+    <view class="nav-btn" bindtap="goToResult">
+      📊 结果统计
+    </view>
+  </view>
+</view>
+
+<view class="modal" wx:if="{{showGameModal}}" bindtap="closeGameModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">{{gameType === 'truth' ? '💬 真心话' : '🚀 大冒险'}}</text>
+    </view>
+    <view class="modal-body">
+      <view class="question-card">
+        <text class="question">{{currentQuestion}}</text>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="modal-btn confirm" bindtap="closeGameModal">
+        开始挑战
+      </view>
+    </view>
+  </view>
+</view>

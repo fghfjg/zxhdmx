@@ -1,0 +1,9 @@
+{
+  "name": "kickUser",
+  "version": "1.0.0",
+  "description": "踢出房间用户",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

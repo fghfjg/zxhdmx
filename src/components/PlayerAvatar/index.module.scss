@@ -1,0 +1,44 @@
+@use '@/styles/variables.scss' as *;
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: $radius-round;
+  border: 4rpx solid white;
+  box-shadow: $shadow-card;
+  object-fit: cover;
+}
+
+.avatarOwner {
+  border-color: #FFD700;
+}
+
+.name {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  max-width: 120rpx;
+  text-align: center;
+  @include text-ellipsis;
+}
+
+.ownerTag {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: white;
+  font-size: $font-size-xs;
+  padding: 2rpx 8rpx;
+  border-radius: $radius-xs;
+  margin-top: 2rpx;
+}

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "openapi": [],
+    "cloudbase": {
+      "env": "cloud1-t4gx3e2a30a25fc7a",
+      "database": {
+        "rooms": {
+          "read": true,
+          "write": true
+        },
+        "players": {
+          "read": true,
+          "write": true
+        }
+      },
+      "storage": {}
+    }
+  }
+}
