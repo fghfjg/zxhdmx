@@ -29,7 +29,7 @@ Page({
         this.calculateTrend(historyList);
       })
       .catch(err => {
-        console.error('获取历史记录失败:', err);
+        if (err.errCode !== -502005) console.error('获取历史记录失败:', err);
         const mockHistory = this.getMockHistory();
         this.setData({ historyList: mockHistory });
         this.calculateStats(mockHistory);

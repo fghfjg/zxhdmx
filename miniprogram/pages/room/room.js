@@ -107,8 +107,7 @@ Page({
         this.loadMessages();
       })
       .catch(err => {
-        console.error('发送消息失败:', err);
-        // 本地模拟
+        if (err.errCode !== -502005) console.error('发送消息失败:', err);
         const localMsg = Object.assign({}, msg, { _id: 'msg_' + Date.now(), createTime: new Date().toISOString() });
         const messages = this.data.messages.concat(localMsg);
         if (messages.length > 10) messages.shift();
@@ -146,7 +145,7 @@ Page({
     });
   },
 
-  // 更新参与者
+  // 更新参与者（仅首次添加，重复抽题只更新题目）
   updateParticipant: function (question) {
     const openId = this.data.myOpenId;
     const nickName = '玩家' + Math.floor(Math.random() * 1000);
@@ -155,20 +154,41 @@ Page({
     if (this.data.useMockData) {
       const roomInfo = this.data.roomInfo;
       if (!roomInfo.participants) roomInfo.participants = [];
-      roomInfo.participants.push({
-        openId, nickName, questionText: question.content,
-        timestamp: new Date().toISOString(), avatarColor
-      });
+      const exists = roomInfo.participants.some(p => p.openId === openId);
+      if (exists) {
+        roomInfo.participants = roomInfo.participants.map(p =>
+          p.openId === openId ? Object.assign({}, p, { questionText: question.content, timestamp: new Date().toISOString() }) : p
+        );
+      } else {
+        roomInfo.participants.push({
+          openId, nickName, questionText: question.content,
+          timestamp: new Date().toISOString(), avatarColor
+        });
+      }
       this.setData({ roomInfo });
       return;
     }
 
-    db.collection('rooms').doc(this.data.roomId).update({
-      data: {
-        participants: _.push({
-          openId, nickName, questionText: question.content,
-          timestamp: db.serverDate(), avatarColor
-        })
+    db.collection('rooms').doc(this.data.roomId).get().then(res => {
+      const room = res.data;
+      const participants = room.participants || [];
+      const exists = participants.some(p => p.openId === openId);
+      if (exists) {
+        const updated = participants.map(p =>
+          p.openId === openId ? Object.assign({}, p, { questionText: question.content, timestamp: db.serverDate() }) : p
+        );
+        return db.collection('rooms').doc(this.data.roomId).update({
+          data: { participants: updated }
+        });
+      } else {
+        return db.collection('rooms').doc(this.data.roomId).update({
+          data: {
+            participants: _.push({
+              openId, nickName, questionText: question.content,
+              timestamp: db.serverDate(), avatarColor
+            })
+          }
+        });
       }
     }).then(() => { this.loadRoomInfo(); })
       .catch(err => { console.error('更新参与记录失败:', err); });
@@ -188,7 +208,9 @@ Page({
 
     db.collection('gameRecords').add({ data: record })
       .then(() => { console.log('保存游戏记录成功'); })
-      .catch(err => { console.error('保存游戏记录失败:', err); });
+      .catch(err => {
+        if (err.errCode !== -502005) console.error('保存游戏记录失败:', err);
+      });
   },
 
   // 踢人

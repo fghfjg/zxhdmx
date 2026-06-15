@@ -26,5 +26,6 @@
       }
     ]
   },
+  "lazyCodeLoading": "requiredComponents",
   "cloud": true
 }

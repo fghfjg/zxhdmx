@@ -10,6 +10,7 @@
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
+    "uglifyFileName": true,
     "newFeature": false,
     "coverView": true,
     "nodeModules": false,
