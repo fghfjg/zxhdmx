@@ -1,9 +1,12 @@
 <view class="page">
   <!-- 用户卡片 -->
   <view class="user-card">
-    <view class="user-avatar">玩</view>
+    <view class="user-avatar">{{userName.charAt(0) || '玩'}}</view>
     <view class="user-info">
-      <text class="user-name">玩家</text>
+      <view class="user-name-wrapper">
+        <text class="user-name" bindtap="editUserName">{{userName}}</text>
+        <text class="edit-icon">✏️</text>
+      </view>
       <text class="user-id">ID: {{openId ? openId.substr(0, 8) : '未获取'}}</text>
     </view>
   </view>

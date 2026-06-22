@@ -30,12 +30,23 @@
 
 .user-info { flex: 1; }
 
+.user-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
 .user-name {
   font-size: 34rpx;
   font-weight: bold;
   color: white;
   display: block;
   margin-bottom: 8rpx;
+}
+
+.edit-icon {
+  font-size: 24rpx;
+  opacity: 0.8;
 }
 
 .user-id {

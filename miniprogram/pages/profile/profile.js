@@ -4,13 +4,49 @@ const db = wx.cloud.database();
 Page({
   data: {
     openId: '',
+    userName: '玩家',
     historyList: [],
     stats: { totalGames: 0, truthCount: 0, dareCount: 0, todayGames: 0, uniqueRooms: 0 },
     trendData: []
   },
 
-  onLoad: function () { this.loadHistory(); },
-  onShow: function () { this.loadHistory(); },
+  onLoad: function () { 
+    this.loadUserName();
+    this.loadHistory(); 
+  },
+  
+  loadUserName: function () {
+    try {
+      const userName = wx.getStorageSync('userName') || '玩家';
+      this.setData({ userName });
+      app.globalData.userInfo.nickName = userName;
+    } catch (error) {
+      console.error('加载用户名失败:', error);
+    }
+  },
+
+  editUserName: function () {
+    const that = this;
+    wx.showModal({
+      title: '修改昵称',
+      editable: true,
+      placeholderText: '请输入新昵称',
+      success: function (res) {
+        if (res.confirm && res.content && res.content.trim()) {
+          const newName = res.content.trim();
+          try {
+            wx.setStorageSync('userName', newName);
+            that.setData({ userName: newName });
+            app.globalData.userInfo.nickName = newName;
+            wx.showToast({ title: '修改成功', icon: 'success' });
+          } catch (error) {
+            console.error('保存用户名失败:', error);
+            wx.showToast({ title: '保存失败', icon: 'none' });
+          }
+        }
+      }
+    });
+  },
 
   loadHistory: function () {
     const openId = app.globalData.openId || 'mock_openid_test';
